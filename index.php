@@ -143,7 +143,6 @@ $tasks = [
 
                         <td class="task__date"></td>
                     </tr>
-                    
                     <?php foreach ($tasks as $task_item): ?>
                     <?php if (!$task_item["performance"] && !$show_complete_tasks): ?>
                     <tr class="tasks__item task">
