@@ -13,39 +13,52 @@ $tasks = [
         "task" => "Собеседование в IT компании",
         "date" => "01.12.2019",
         "category" => $projects["job"],
-        "performance" => false
+        "completed" => false
     ],
     [
         "task" => "Выполнить тестовое задание",
         "date" => "25.12.2019",
         "category" => $projects["job"],
-        "performance" => false
+        "completed" => false
     ],
     [
         "task" => "Сделать задание первого раздела",
         "date" => "21.12.2019",
         "category" => $projects["study"],
-        "performance" => true
+        "completed" => true
     ],
     [
         "task" => "Встреча с другом",
         "date" => "22.12.2019",
         "category" => $projects["incom"],
-        "performance" => false
+        "completed" => false
     ],
     [
         "task" => "Купить корм для кота",
         "date" => null,
         "category" => $projects["home"],
-        "performance" => false
+        "completed" => false
     ],
     [
         "task" => "Заказать пиццу",
         "date" => null,
         "category" => $projects["home"],
-        "performance" => false
+        "completed" => false
     ]
 ];
+
+function projects_count($task_catgory, $tasks_array) {
+    $shift = 0;
+    for ($i=0; $i < count($tasks_array); $i++) { 
+        
+        if ($tasks_array[$i]['category'] == $task_catgory) {
+            $shift++;    
+        }
+        
+    }
+    return $shift;
+};
+
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -94,7 +107,7 @@ $tasks = [
                         <?php foreach ($projects as $nav_item) : ?>
                         <li class="main-navigation__list-item">
                             <a class="main-navigation__list-item-link" href="#"><?= $nav_item; ?></a>
-                            <span class="main-navigation__list-item-count">0</span>
+                            <span class="main-navigation__list-item-count"><?= projects_count($nav_item, $tasks); ?></span>
                         </li>
                         <?php endforeach; ?>
                     </ul>
@@ -144,7 +157,7 @@ $tasks = [
                         <td class="task__date"></td>
                     </tr>
                     <?php foreach ($tasks as $task_item): ?>
-                    <?php if (!$task_item["performance"] && !$show_complete_tasks): ?>
+                    <?php if (!$task_item["completed"] && !$show_complete_tasks): ?>
                     <tr class="tasks__item task">
                         <td class="task__select">
                             <label class="checkbox task__checkbox">
@@ -155,11 +168,11 @@ $tasks = [
                         <td class="task__date"><?= ($task_item["date"]) ? $task_item["date"] : "Нет"; ?></td>
 
                         <td class="task__controls">
-                            <?= ($task_item["performance"]) ? "Да" : "Нет"; ?>
+                            <?= ($task_item["completed"]) ? "Да" : "Нет"; ?>
                         </td>
                     </tr>
-                    <?php elseif($task_item["performance"] && $show_complete_tasks): ?>
-                    <tr class="tasks__item task <?= ($task_item["performance"]) ? "task--completed" : ""; ?>">
+                    <?php elseif($task_item["completed"] && $show_complete_tasks): ?>
+                    <tr class="tasks__item task <?php if($task_item["completed"]): ?> task--completed <?php endif; ?>">
                         <td class="task__select">
                             <label class="checkbox task__checkbox">
                                 <input class="checkbox__input visually-hidden" type="checkbox" <?= ($show_complete_tasks) ? "checked" : ""; ?>>
@@ -169,7 +182,7 @@ $tasks = [
                         <td class="task__date"><?= ($task_item["date"])? $task_item["date"] : "Нет"; ?></td>
 
                         <td class="task__controls">
-                            <?= ($task_item["performance"])? "Да" : "Нет"; ?>
+                            <?= ($task_item["completed"])? "Да" : "Нет"; ?>
                         </td>
                     </tr> 
                     <?php endif; ?>
