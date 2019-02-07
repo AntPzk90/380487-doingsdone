@@ -14,6 +14,7 @@ $tasks = [
         "date" => "01.12.2019",
         "category" => $projects["job"],
         "completed" => false
+
     ],
     [
         "task" => "Выполнить тестовое задание",
