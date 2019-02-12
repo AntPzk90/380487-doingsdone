@@ -38,14 +38,16 @@
     </tr>
     <?php foreach ($tasks as $task_item): ?>
     <?php if (!$task_item["completed"] && !$show_complete_tasks): ?>
-    <tr class="tasks__item task">
+    <tr class="tasks__item task <?php if(days_counter($task_item["date"]) <= 24): ?> task--important <?php endif; ?>">
         <td class="task__select">
             <label class="checkbox task__checkbox">
                 <input class="checkbox__input visually-hidden" type="checkbox">
                 <span class="checkbox__text"><?= htmlspecialchars($task_item["task"]); ?></span>
             </label>
         </td>
-        <td class="task__date"><?= ($task_item["date"]) ? $task_item["date"] : "Нет"; ?></td>
+        <td class="task__date">
+            <?= ($task_item["date"]) ? $task_item["date"] : "Нет"; ?>
+        </td>
 
         <td class="task__controls">
             <?= ($task_item["completed"]) ? "Да" : "Нет"; ?>
@@ -59,7 +61,9 @@
                 <span class="checkbox__text"><?= htmlspecialchars($task_item["task"]); ?></span>
             </label>
         </td>
-        <td class="task__date"><?= ($task_item["date"])? $task_item["date"] : "Нет"; ?></td>
+        <td class="task__date">
+            <?= ($task_item["date"])? $task_item["date"] : "Нет"; ?>
+        </td>
 
         <td class="task__controls">
             <?= ($task_item["completed"])? "Да" : "Нет"; ?>
