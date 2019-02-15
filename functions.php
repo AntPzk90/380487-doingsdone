@@ -38,7 +38,7 @@ function projects_count($category_name, $tasks) {
  * @return {integer} ост. количество дней до конечной даты
  */
 function days_counter($end_date){
-    $dt_now = date('d.m.Y');
+    $dt_now = date('d.m.Y h:i:s a');
     $unix_dt_now = strtotime($dt_now);
     $unix_dt_end = strtotime($end_date);
     $left_hours = ($unix_dt_end - $unix_dt_now) / 3600;
