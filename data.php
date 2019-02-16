@@ -9,7 +9,7 @@ $projects = [
 $tasks = [
     [
         "task" => "Собеседование в IT компании",
-        "date" => "12.02.2019",
+        "date" => "15.02.2019",
         "category" => $projects["job"],
         "completed" => false
     ],

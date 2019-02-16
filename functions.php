@@ -15,12 +15,17 @@ function include_template($name, $data) {
 
     return $result;
 }
-
+/**
+ * ф-ция считает количество задач в конкретной категории
+ * @param {string} $category_name - название текущей категории
+ * @param {Arary} $tasks - все задачи для текущего пользователя
+ * @return {integer} количество задач в категории
+ */
 function projects_count($category_name, $tasks) {
     $shift = 0;
-        foreach($tasks as $val) { 
+        foreach($tasks as $tasks_item){ 
         
-        if ($val['category'] == $category_name) {
+        if ($tasks_item['category'] == $category_name) {
             $shift++;    
         }
         
@@ -28,27 +33,15 @@ function projects_count($category_name, $tasks) {
     return $shift;
 };
 /**
- * ф-ция считает количество задач в конкретной категории
- * @param {string} $category_name - название текущей категории
- * @param {Arary} $tasks - все задачи для текущего пользователя
- * @return {integer} количество задач в категории
- */
-/*не придумал где оставить данные про часовой пояс*/
-date_default_timezone_get("Europe/Moscow");
-setlocale(LC_ALL, "ru_RU");
-
-function days_counter($end_date){
-    $tsk_dt_end = $end_date;
-    $dt_now = date('d.m.Y');
-    $dt_end = $tsk_dt_end;
-    $unix_dt_now = strtotime($dt_now);
-    $unix_dt_end = strtotime($dt_end);
-    $left_days = ($unix_dt_end - $unix_dt_now) / 3600;
-    return $left_days;
-}
-/**
  * ф-ция считает количество оставшихся дней до определённой пользователем даты
  * @param {string} $end_date - конечная дата выполнения задачи
  * @return {integer} ост. количество дней до конечной даты
  */
+function days_counter($end_date){
+    $dt_now = date('d.m.Y h:i:s a');
+    $unix_dt_now = strtotime($dt_now);
+    $unix_dt_end = strtotime($end_date);
+    $left_hours = ($unix_dt_end - $unix_dt_now) / 3600;
+    return $left_hours;
+}
 ?>
