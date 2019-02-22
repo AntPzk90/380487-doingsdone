@@ -9,8 +9,8 @@ VALUES
 ("Входящие", 1),
 ("Учеба", 1),
 ("Работа", 1),
-("Домашние дела", 2),
-("Авто", 2);
+("Домашние дела", 1),
+("Авто", 1);
 
 INSERT INTO tasks (status, title, file, deadline, id_user, id_project )
 VALUES

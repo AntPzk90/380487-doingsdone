@@ -10,6 +10,7 @@
 </head>
 
 <body>
+
 <h1 class="visually-hidden">Дела в порядке</h1>
 
 <div class="page-wrapper">
@@ -44,8 +45,8 @@
                     <ul class="main-navigation__list">
                         <?php foreach ($projects as $nav_item) : ?>
                         <li class="main-navigation__list-item">
-                            <a class="main-navigation__list-item-link" href="#"><?= htmlspecialchars($nav_item); ?></a>
-                            <span class="main-navigation__list-item-count"><?= projects_count($nav_item, $tasks); ?></span>
+                            <a class="main-navigation__list-item-link" href="#"><?= htmlspecialchars($nav_item["name_project"]); ?></a>
+                            <span class="main-navigation__list-item-count"><?= projects_count($nav_item["name_project"], $tasks); ?></span>
                         </li>
                         <?php endforeach; ?>
                     </ul>

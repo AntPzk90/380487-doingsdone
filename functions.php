@@ -25,7 +25,7 @@ function projects_count($category_name, $tasks) {
     $shift = 0;
         foreach($tasks as $tasks_item){ 
         
-        if ($tasks_item['category'] == $category_name) {
+        if ($tasks_item['name_project'] == $category_name) {
             $shift++;    
         }
         
