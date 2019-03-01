@@ -10,7 +10,7 @@
 </head>
 
 <body>
-
+    <!-- <pre><?php var_dump($projects) ?></pre> -->
 <h1 class="visually-hidden">Дела в порядке</h1>
 
 <div class="page-wrapper">
@@ -44,8 +44,9 @@
                     <ul class="main-navigation__list">
                         <?php foreach ($projects as $nav_item) : ?>
                         <?php 
-                            $_GET['name'] = $nav_item['name_project'];
+                            $_GET['id'] = $nav_item['id'];
                             $str = '?'.http_build_query($_GET);
+                            // echo $nav_item["name_project"];
                         ?>    
 
                         <li class="main-navigation__list-item">
