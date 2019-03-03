@@ -10,7 +10,7 @@
 </head>
 
 <body>
-
+    <!-- <pre><?php var_dump($projects) ?></pre> -->
 <h1 class="visually-hidden">Дела в порядке</h1>
 
 <div class="page-wrapper">
@@ -36,7 +36,6 @@
                 </div>
             </div>
         </header>
-
         <div class="content">
             <section class="content__side">
                 <h2 class="content__side-heading">Проекты</h2>
@@ -44,8 +43,14 @@
                 <nav class="main-navigation">
                     <ul class="main-navigation__list">
                         <?php foreach ($projects as $nav_item) : ?>
+                        <?php 
+                            $_GET['id'] = $nav_item['id'];
+                            $str = '?'.http_build_query($_GET);
+                            // echo $nav_item["name_project"];
+                        ?>    
+
                         <li class="main-navigation__list-item">
-                            <a class="main-navigation__list-item-link" href="#"><?= htmlspecialchars($nav_item["name_project"]); ?></a>
+                            <a class="main-navigation__list-item-link" href=".<?php echo $str; ?>."><?= htmlspecialchars($nav_item["name_project"]); ?></a>
                             <span class="main-navigation__list-item-count"><?= projects_count($nav_item["name_project"], $tasks); ?></span>
                         </li>
                         <?php endforeach; ?>
