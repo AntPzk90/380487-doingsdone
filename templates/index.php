@@ -29,11 +29,9 @@
                 <span class="checkbox__text">Сделать главную страницу Дела в порядке</span>
             </label>
         </td>
-
         <td class="task__file">
-            <a class="download-link" href="#">Home.psd</a>
+            <a class="download-link" href="">Home.psd</a>
         </td>
-
         <td class="task__date"></td>
     </tr>
     <?php foreach ($tasks as $task_item): ?>
@@ -45,10 +43,16 @@
                 <span class="checkbox__text"><?= htmlspecialchars($task_item["title"]); ?></span>
             </label>
         </td>
+
+        <?php if (!empty($task_item["file"])): ?>
+        <td class="task__file">
+            <a class="download-link" href="<?= "http://localhost/380487-doingsdone/UPLOADS/".$task_item["file"]; ?>"><?= $task_item["file"]; ?></a>
+        </td>
+        <?php endif; ?>
         <td class="task__date">
             <?= ($task_item["deadline"]) ? $task_item["deadline"] : "Нет"; ?>
         </td>
-
+    
         <td class="task__controls">
             <?= ($task_item["status"]) ? "Да" : "Нет"; ?>
         </td>
@@ -61,6 +65,11 @@
                 <span class="checkbox__text"><?= htmlspecialchars($task_item["title"]); ?></span>
             </label>
         </td>
+        <?php if (!empty($task_item["file"])): ?>
+        <td class="task__file">
+            <a class="download-link" href="<?= "http://localhost/380487-doingsdone/UPLOADS/".$task_item["file"]; ?>"><?= $task_item["file"]; ?></a>
+        </td>
+        <?php endif; ?>
         <td class="task__date">
             <?= ($task_item["deadline"])? $task_item["deadline"] : "Нет"; ?>
         </td>
@@ -68,6 +77,7 @@
         <td class="task__controls">
             <?= ($task_item["status"])? "Да" : "Нет"; ?>
         </td>
+        
     </tr> 
     <?php endif; ?>
     <?php endforeach; ?>

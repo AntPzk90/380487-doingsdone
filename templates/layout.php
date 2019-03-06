@@ -10,7 +10,6 @@
 </head>
 
 <body>
-    <!-- <pre><?php var_dump($projects) ?></pre> -->
 <h1 class="visually-hidden">Дела в порядке</h1>
 
 <div class="page-wrapper">
@@ -21,7 +20,7 @@
             </a>
 
             <div class="main-header__side">
-                <a class="main-header__side-item button button--plus open-modal" href="pages/form-task.html">Добавить задачу</a>
+                <a class="main-header__side-item button button--plus open-modal" href="add.php">Добавить задачу</a>
 
                 <div class="main-header__side-item user-menu">
                     <div class="user-menu__image">
@@ -46,7 +45,6 @@
                         <?php 
                             $_GET['id'] = $nav_item['id'];
                             $str = '?'.http_build_query($_GET);
-                            // echo $nav_item["name_project"];
                         ?>    
 
                         <li class="main-navigation__list-item">
@@ -58,7 +56,7 @@
                 </nav>
 
                 <a class="button button--transparent button--plus content__side-button"
-                   href="pages/form-project.html" target="project_add">Добавить проект</a>
+                   href="../add.php" target="project_add">Добавить проект</a>
             </section>
 
             <main class="content__main">
