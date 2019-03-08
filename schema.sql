@@ -22,7 +22,7 @@ CREATE TABLE tasks(
 	status BIT NOT NULL DEFAULT 0,
 	title CHAR(255),
 	file CHAR(255),
-	deadline TIMESTAMP,
+	deadline DATE,
 	id_project INT NOT NULL,
 	id_user INT NOT NULL
 );
