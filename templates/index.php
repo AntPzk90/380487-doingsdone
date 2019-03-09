@@ -46,7 +46,7 @@
 
         <?php if (!empty($task_item["file"])): ?>
         <td class="task__file">
-            <a class="download-link" href="<?= "http://localhost/380487-doingsdone/UPLOADS/".$task_item["file"]; ?>"><?= $task_item["file"]; ?></a>
+            <a class="download-link" href="<?= "uploads/".$task_item["file"]; ?>"><?= $task_item["file"]; ?></a>
         </td>
         <?php endif; ?>
         <td class="task__date">
@@ -67,7 +67,7 @@
         </td>
         <?php if (!empty($task_item["file"])): ?>
         <td class="task__file">
-            <a class="download-link" href="<?= "http://localhost/380487-doingsdone/UPLOADS/".$task_item["file"]; ?>"><?= $task_item["file"]; ?></a>
+            <a class="download-link" href="<?= "uploads/".$task_item["file"]; ?>"><?= $task_item["file"]; ?></a>
         </td>
         <?php endif; ?>
         <td class="task__date">
