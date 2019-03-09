@@ -53,7 +53,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 	$date_task_error = "Вы указали прошедшую дату";
 
 	if(count($errors)){
-		$new_task = include_template("add.php", ["tasks" => $tasks, "projects" => $projects, "errors" => $errors,"date_result" => $date_result, "date_task_error" => $date_task_error, "name_task_error" => $name_task_error, "date" => $calendar_format]);
+		$page_content = include_template("add.php", ["tasks" => $tasks, "projects" => $projects, "errors" => $errors,"date_result" => $date_result, "date_task_error" => $date_task_error, "name_task_error" => $name_task_error, "date" => $calendar_format]);
 		print($new_task);
 	}else{
 		//если нет ошибок то перееадресовать пользователя на гл. стр. и отправить таск в БД
@@ -69,11 +69,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 			$result = mysqli_query($config_sql, $sql);
 			if($sql){
 				// заголовок для перенаправления пользователя
-				header("location:/380487-doingsdone/");
+				header("location: index.php");
 			}
 	}
 
 }else{
-	$new_task = include_template("add.php", ["tasks" => $tasks, "projects" => $projects]);
-	print($new_task);
+	$page_content = include_template("add.php", ["tasks" => $tasks, "projects" => $projects]);
+	$layout_content = include_template("layout.php", ["projects" => $projects, "content" => $page_content, "tasks" => $tasks, "title" => "Добавление задачи"]);
+
+print($layout_content);
 }
