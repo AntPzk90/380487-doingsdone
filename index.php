@@ -4,7 +4,9 @@ $show_complete_tasks = rand(0, 1);
 
 require_once("config.php");
 require_once("functions.php");
+
 $session_user_id = $_SESSION["user"]["id"];
+
 //массив с проэктами
 $sql = "SELECT p.id, p.name_project, p.id_user FROM projects p ";
 $result = mysqli_query($config_sql, $sql);

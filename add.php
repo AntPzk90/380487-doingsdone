@@ -1,6 +1,7 @@
 <?php
 require_once('functions.php');
 require_once('config.php');
+
 $session_user_id = $_SESSION["user"]["id"];
 
 $sql = "SELECT p.id, p.name_project, p.id_user FROM projects p ";
