@@ -2,6 +2,7 @@
 require_once("config.php");
 require_once("functions.php");
 
+
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 	$user_reg = $_POST;
 	$required_fields = ["email",  "password", "name"];
@@ -34,7 +35,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 		$result = mysqli_query($config_sql, $sql);
 		if($sql){
 			// заголовок для перенаправления пользователя на страницу входа
-			header("location: enter.php");
+			header("location: auth.php");
 		}
 	}
 }
