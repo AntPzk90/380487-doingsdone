@@ -8,10 +8,8 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/flatpickr.min.css">
 </head>
-
 <body>
 <h1 class="visually-hidden">Дела в порядке</h1>
-
 <div class="page-wrapper">
     <div class="container container--with-sidebar">
         <header class="main-header">
@@ -30,7 +28,7 @@
                     <div class="user-menu__data">
                         <p>Константин</p>
 
-                        <a href="#">Выйти</a>
+                        <a href="logout.php">Выйти</a>
                     </div>
                 </div>
             </div>
@@ -58,10 +56,10 @@
                 <a class="button button--transparent button--plus content__side-button"
                    href="../add.php" target="project_add">Добавить проект</a>
             </section>
-
             <main class="content__main">
                 <?= $content; ?>
             </main>
+            </section>
         </div>
     </div>
 </div>

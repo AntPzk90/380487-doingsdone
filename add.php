@@ -1,11 +1,13 @@
 <?php
 require_once('functions.php');
 require_once('config.php');
+$session_user_id = $_SESSION["user"]["id"];
+
 $sql = "SELECT p.id, p.name_project, p.id_user FROM projects p ";
 $result = mysqli_query($config_sql, $sql);
 $projects = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
-$sql = "SELECT t.title, t.status, t.deadline, p.name_project, t.id_project FROM tasks t JOIN projects p ON t.id_project = p.id WHERE t.id_user = 1";
+$sql = "SELECT t.title, t.status, t.deadline, p.name_project, t.id_project FROM tasks t JOIN projects p ON t.id_project = p.id WHERE t.id_user = '$session_user_id'";
 $result_task = mysqli_query($config_sql, $sql);
 $tasks = mysqli_fetch_all($result_task, MYSQLI_ASSOC);
 
