@@ -2,6 +2,9 @@
 require_once("config.php");
 require_once("functions.php");
 
+if(!empty($_SESSION["user"])){
+	$session_user_id = $_SESSION["user"]["id"];
+}
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 	$user_reg = $_POST;

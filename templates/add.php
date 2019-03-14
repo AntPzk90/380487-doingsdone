@@ -1,5 +1,4 @@
 <h2 class="content__main-heading">Добавление задачи</h2>
-
 <form class="form"  action="add.php" method="post" enctype="multipart/form-data">
   <div class="form__row">
     <label class="form__label" for="name">Название <sup>*</sup></label>
@@ -15,7 +14,7 @@
     <select class="form__input form__input--select" name="name_project" id="project">
     <?php foreach ($projects as $projects_item) : ?>
       <option value="<?= $projects_item["name_project"]; ?>"><?= $projects_item["name_project"]; ?></option>
-    <?php endforeach?>
+    <?php endforeach; ?>
     </select>
   </div>
   

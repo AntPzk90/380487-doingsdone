@@ -2,6 +2,10 @@
 require_once("config.php");
 require_once("functions.php");
 
+if(!empty($_SESSION["user"])){
+	$session_user_id = $_SESSION["user"]["id"];
+}
+
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 	$user_auth = $_POST;
 	$required_fields = ["email",  "password"];
@@ -36,10 +40,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 		print($layout_content);
 	}else{
 		header("location: index.php");
-		print("kljlk");
 	}
-}
+}else{
 	$page_content = include_template("auth.php", []);
 	$layout_content = include_template("enter-register-layout.php", ["page_content" => $page_content, "title" => "Авторизация"]);
 	print($layout_content);
+}
 ?>

@@ -1,15 +1,23 @@
 <?php
 require_once('functions.php');
 require_once('config.php');
-$session_user_id = $_SESSION["user"]["id"];
 
-$sql = "SELECT p.id, p.name_project, p.id_user FROM projects p ";
-$result = mysqli_query($config_sql, $sql);
-$projects = mysqli_fetch_all($result, MYSQLI_ASSOC);
+if(!empty($_SESSION["user"])){
+	$session_user_id = $_SESSION["user"]["id"];
+}else{
+	$session_user_id = 0;
+}
+//массив с проэктами
+$sql = "SELECT p.id, p.name_project, p.id_user FROM projects p WHERE p.id_user = '$session_user_id'";
+$projects = get_data_from_sql($sql,$config_sql);
+//массив с задачами
+$sql = "SELECT t.title, t.status, t.deadline, p.name_project, t.id_project, t.file FROM tasks t JOIN projects p ON t.id_project = p.id WHERE t.id_user = '$session_user_id'";
+$tasks = get_data_from_sql($sql,$config_sql);
+//имя пользователя
+$sql = "SELECT u.name FROM users u WHERE u.id = '$session_user_id'";
+$user_name = get_data_from_sql($sql,$config_sql);
 
-$sql = "SELECT t.title, t.status, t.deadline, p.name_project, t.id_project FROM tasks t JOIN projects p ON t.id_project = p.id WHERE t.id_user = '$session_user_id'";
-$result_task = mysqli_query($config_sql, $sql);
-$tasks = mysqli_fetch_all($result_task, MYSQLI_ASSOC);
+$_user_name = $user_name[0]["name"];
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 
@@ -30,12 +38,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 		$unix_now_date = strtotime($now_date);
 		$unix_deadline_date = strtotime($deadline_date);
 		$date_result = ($unix_deadline_date - $unix_now_date) / 3600;
-		
 		if($date_result < 0){
 			$error_date_massage = "вы указали прошедшую дату";
 			//вносим в массив с ошибками ошибку даты.
 			$errors["date_error"] = $date_form;
 		}
+	}else{
+		$date_form = date('Y-m-d');
 	}
 
 	foreach ($required_fields as $field) {
@@ -53,13 +62,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 	//текст ошибок
 	$name_task_error = "Заполните это поле, &quot;Название проекта&quot; обязательно к заполнению.";
 	$date_task_error = "Вы указали прошедшую дату";
-
 	if(count($errors)){
 		$page_content = include_template("add.php", ["tasks" => $tasks, "projects" => $projects, "errors" => $errors,"date_result" => $date_result, "date_task_error" => $date_task_error, "name_task_error" => $name_task_error, "date" => $calendar_format]);
-		print($new_task);
+		$layout_content = include_template("layout.php", ["projects" => $projects, "content" => $page_content, "tasks" => $tasks, "title" => "Добавление задачи"]);
+		print($layout_content);
+
 	}else{
 		//если нет ошибок то перееадресовать пользователя на гл. стр. и отправить таск в БД
-			$_title = $task['title'];
 			$_name = $task['name_project'];
 			//уздаём id проекта для отправки в БД tasks
 			$sql = "SELECT id FROM projects WHERE '$_name' = name_project";
@@ -67,8 +76,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 			$id_project = mysqli_fetch_array($result, MYSQLI_ASSOC);
 			//формируем запрос для отправки в бд tasks
 			$sql = "INSERT INTO tasks (title, deadline, id_user, id_project, file)
-					VALUES ('$_title', '$date_form', '1', '$id_project[id]', '$path')";
-			$result = mysqli_query($config_sql, $sql);
+					VALUES (?, ?, ?, ?, ?)";
+			$stmt = db_get_prepare_stmt($config_sql, $sql, [$task['title'], $date_form, $session_user_id, $id_project[id], $path]);
+        	$result = mysqli_stmt_execute($stmt);
 			if($sql){
 				// заголовок для перенаправления пользователя
 				header("location: index.php");
@@ -77,7 +87,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 }else{
 	$page_content = include_template("add.php", ["tasks" => $tasks, "projects" => $projects]);
-	$layout_content = include_template("layout.php", ["projects" => $projects, "content" => $page_content, "tasks" => $tasks, "title" => "Добавление задачи"]);
+	$layout_content = include_template("layout.php", ["projects" => $projects, "content" => $page_content, "tasks" => $tasks,"user_name" => $_user_name, "title" => "Добавление задачи"]);
 
 print($layout_content);
 }

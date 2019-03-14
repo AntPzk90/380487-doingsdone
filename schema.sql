@@ -13,7 +13,8 @@ CREATE TABLE users(
 CREATE TABLE projects(
 	id INT AUTO_INCREMENT PRIMARY KEY,
 	name_project CHAR(128) 	NOT NULL,
-	id_user INT NOT NULL
+	id_user INT NOT NULL,
+	FOREIGN KEY (id_user) REFERENCES users(id)
 );
 CREATE TABLE tasks(
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -24,5 +25,7 @@ CREATE TABLE tasks(
 	file CHAR(255),
 	deadline DATE,
 	id_project INT NOT NULL,
-	id_user INT NOT NULL
+	id_user INT NOT NULL,
+	FOREIGN KEY (id_user) REFERENCES users(id),
+	FOREIGN KEY (id_project) REFERENCES projects(id)
 );

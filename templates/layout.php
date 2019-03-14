@@ -26,7 +26,7 @@
                     </div>
 
                     <div class="user-menu__data">
-                        <p>Константин</p>
+                        <p><?= $user_name; ?></p>
 
                         <a href="logout.php">Выйти</a>
                     </div>
@@ -54,7 +54,7 @@
                 </nav>
 
                 <a class="button button--transparent button--plus content__side-button"
-                   href="../add.php" target="project_add">Добавить проект</a>
+                   href="add_project.php" target="project_add">Добавить проект</a>
             </section>
             <main class="content__main">
                 <?= $content; ?>
@@ -72,7 +72,7 @@
             <p>Веб-приложение для удобного ведения списка дел.</p>
         </div>
 
-        <a class="main-footer__button button button--plus" href="pages/form-task.html">Добавить задачу</a>
+        <a class="main-footer__button button button--plus" href="add.php">Добавить задачу</a>
 
         <div class="main-footer__social social">
             <span class="visually-hidden">Мы в соцсетях:</span>
