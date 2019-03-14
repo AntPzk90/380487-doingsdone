@@ -28,6 +28,7 @@ if(isset($_GET['task_id']) and isset($_GET['check'])){
     $result = mysqli_query($config_sql, $sql);
 }
 
+
 //массив с проэктами
 $sql = "SELECT p.id, p.name_project, p.id_user FROM projects p WHERE p.id_user = '$session_user_id'";
 $projects = get_data_from_sql($sql,$config_sql);
